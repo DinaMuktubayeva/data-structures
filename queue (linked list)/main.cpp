@@ -32,7 +32,7 @@ int main() {
 
 
 
-	std::cout << "Popping from a queue\n";
+	std::cout << "Peeking and popping from a queue\n";
 	for (int x = 0; x < 10; ++x) {
 		std::cout << q2.peek() << " ";
 		q2.pop();
@@ -48,7 +48,7 @@ int main() {
 
 	output(q1); 
 
-	std::cout << "Popping from a queue until it's empty\n";
+	std::cout << "Peeking and popping from a queue until it's empty\n";
 	while (!q2.empty()) {
 		std::cout << q2.peek() << " ";
 		q2.pop();
