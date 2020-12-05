@@ -1,4 +1,4 @@
-# Three basic data structures implemented in C++
+# Basic data structures implemented in C++
 
 Each folder includes:
 1. A header file
