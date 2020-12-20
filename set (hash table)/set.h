@@ -7,41 +7,34 @@
 #include <math.h>
 
 // Case insensitive string equality
-bool equal(const std::string& s1, const std::string& s2);
+bool equal(const std::string &s1, const std::string &s2);
 
 // Hash function for strings
-size_t hash(const std::string& s);
+size_t hash(const std::string &s);
 
-
-class set {
-
-	std::list<std::string>* bucket_array;
-
+class set
+{
+	std::list<std::string> *bucket_array;
 	size_t bucket_array_size;
-
 	size_t set_size;
-
 	const double max_load_factor = 3.0;
 
 public:
-
 	// Creates an empty set
-	set() :
-		bucket_array(new std::list<std::string>[4]),
-		bucket_array_size(4),
-		set_size(0)
+	set() : bucket_array(new std::list<std::string>[4]),
+					bucket_array_size(4),
+					set_size(0)
 	{
-
 	}
 
 	// Copy constructor
-	set(const set& s);
+	set(const set &s);
 
 	// Initializer list constructor
 	set(std::initializer_list<std::string> ilist);
 
 	// Copy assignment
-	set& operator=(const set& s);
+	set &operator=(const set &s);
 
 	// Insert the given value into the set, if it is not already there.
 	// Returns true if and only if the value was not already there
@@ -64,16 +57,19 @@ public:
 	bool empty() const;
 
 	// Returns the current load factor of the underlying hash table
-	double loadfactor() const {
+	double loadfactor() const
+	{
 		return (double)set_size / (double)bucket_array_size;
 	}
 
 	// Returns the standard deviation of the number of items in the buckets
-	double standarddev() const {
+	double standarddev() const
+	{
 		double sum = 0.0;
 		double lf = loadfactor();
 
-		for (size_t i = 0; i < bucket_array_size; ++i) {
+		for (size_t i = 0; i < bucket_array_size; ++i)
+		{
 			double dif = bucket_array[i].size() - lf;
 			sum += dif * dif;
 		}
@@ -83,22 +79,28 @@ public:
 
 	// Print out the contents of the set -- here we are showing the items
 	// in each of the individual buckets
-	void print(std::ostream& out) const {
-		for (size_t i = 0; i < bucket_array_size; ++i) {
+	void print(std::ostream &out) const
+	{
+		for (size_t i = 0; i < bucket_array_size; ++i)
+		{
 			std::list<std::string> bucket = bucket_array[i];
 
 			out << "bucket[" << i << "] = {";
 
-				bool first = true;
+			bool first = true;
 
-				for (std::string val : bucket) {
-					if (first) {
-						out << val;
-						first = false;
-					} else {
-						out << ", " << val;
-					}
+			for (std::string val : bucket)
+			{
+				if (first)
+				{
+					out << val;
+					first = false;
 				}
+				else
+				{
+					out << ", " << val;
+				}
+			}
 
 			out << "}" << std::endl;
 		}
@@ -108,7 +110,8 @@ public:
 	~set();
 };
 
-inline std::ostream& operator<<(std::ostream& out, const set& s) {
+inline std::ostream &operator<<(std::ostream &out, const set &s)
+{
 	s.print(out);
 	return out;
 }

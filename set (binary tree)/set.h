@@ -1,46 +1,50 @@
 #ifndef SET_INCLUDED
-#define SET_INCLUDED    1 
+#define SET_INCLUDED 1
 
 #include <iostream>
 
-class set {
+class set
+{
+	// a binary search tree implementation
+	struct treenode
+	{
+		int value;
+		treenode *left;
+		treenode *right;
 
-	// Private type for internal set use only; here we are
-	// using a binary search tree implementation
-	struct treenode {
-	   int value;
-	   treenode* left;
-	   treenode* right;
-
-	   treenode(int val)
-	      : value(val),
-	        left(nullptr),
-	        right(nullptr)
-	   { }
+		treenode(int val)
+				: value(val),
+					left(nullptr),
+					right(nullptr)
+		{
+		}
 	};
 
-	// Fields of the BST-based set object
 	size_t set_size;
-	treenode* root;
+	treenode *root;
 
 	// This is a recursive helper function that should create and return an exact
 	// copy of the tree structure rooted at original
-	static treenode* copynodes(treenode* original);
+	static treenode *copynodes(treenode *original);
 
 	// This is a recursive helper function that should deallocate all of the
 	// nodes in the tree structure rooted at node
-	static void deallocatenodes(treenode* node);
+	static void deallocatenodes(treenode *node);
 
 	// This is a recursive helper function called by print to output all of the
 	// values of the tree in sorted order using an in-order traversal
-	static void printhelper(std::ostream &out, treenode* node){
-		if (node != nullptr) {
-			if (node->left != nullptr) {
+	static void printhelper(std::ostream &out, treenode *node)
+	{
+		if (node != nullptr)
+		{
+			if (node->left != nullptr)
+			{
 				printhelper(out, node->left);
 				out << ", ";
 			}
 			out << node->value;
-			if (node->right != nullptr) {
+			if (node->right != nullptr)
+			{
 				out << ", ";
 				printhelper(out, node->right);
 			}
@@ -48,29 +52,32 @@ class set {
 	}
 
 public:
-
 	// Default ordered set is empty
-	set() : set_size(0), root(nullptr) { }
+	set() : set_size(0), root(nullptr) {}
 
 	// Copy constructor
-	set(const set &s) : set_size(s.set_size), root(nullptr) {
+	set(const set &s) : set_size(s.set_size), root(nullptr)
+	{
 		root = copynodes(s.root);
 	}
 
 	// Initializer list constructor
-	set(std::initializer_list<int> init) : set_size(0), root(nullptr) {
-		for (auto el : init) {
+	set(std::initializer_list<int> init) : set_size(0), root(nullptr)
+	{
+		for (auto el : init)
 			insert(el);
-		}
 	}
 
 	// Copy assignment
-	set& operator=(const set &s) {
-		if (&s != this) {
+	set &operator=(const set &s)
+	{
+		if (&s != this)
+		{
 			deallocatenodes(root);
 			root = copynodes(s.root);
 			set_size = s.set_size;
 		}
+
 		return *this;
 	}
 
@@ -99,22 +106,24 @@ public:
 	bool empty() const;
 
 	// Print out the contents of the set, in order from smallest to largest
-	void print(std::ostream &out) const {
+	void print(std::ostream &out) const
+	{
 		out << "{";
 		printhelper(out, root);
 		out << "}";
 	}
 
 	// Destructor
-	~set() {
+	~set()
+	{
 		deallocatenodes(root);
 	}
 };
 
-inline std::ostream& operator<<(std::ostream &out, const set &s) {
+inline std::ostream &operator<<(std::ostream &out, const set &s)
+{
 	s.print(out);
 	return out;
 }
 
 #endif
-

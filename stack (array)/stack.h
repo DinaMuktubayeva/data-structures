@@ -3,30 +3,28 @@
 
 #include <ostream>
 
-class stack {
-
+class stack
+{
 	int *values;
 	size_t stack_size;
 	size_t array_capacity;
 
 public:
-
 	// Creates an empty stack
-	stack() :
-		values(new int[5]),
-		stack_size(0),
-		array_capacity(5)
+	stack() : values(new int[5]),
+						stack_size(0),
+						array_capacity(5)
 	{
 	}
 
 	// Copy constructor
-	stack(const stack& stk);
+	stack(const stack &stk);
 
 	// Initializer list constructor
 	stack(std::initializer_list<int> ilist);
 
 	// Copy assignment
-	stack& operator=(const stack& stk);
+	stack &operator=(const stack &stk);
 
 	// Insert an item at the top of the stack
 	void push(int val);
@@ -49,11 +47,13 @@ public:
 	bool empty() const;
 
 	// Print out the contents of the stack
-	void print(std::ostream& out) const {
-
+	void print(std::ostream &out) const
+	{
 		out << "[";
-		for (size_t i = 0; i < stack_size; ++i) {
-			if (i > 0) {
+		for (size_t i = 0; i < stack_size; ++i)
+		{
+			if (i > 0)
+			{
 				out << ", ";
 			}
 			out << values[i];
@@ -65,7 +65,8 @@ public:
 	~stack();
 };
 
-inline std::ostream& operator<<(std::ostream& out, const stack& stk) {
+inline std::ostream &operator<<(std::ostream &out, const stack &stk)
+{
 	stk.print(out);
 	return out;
 }

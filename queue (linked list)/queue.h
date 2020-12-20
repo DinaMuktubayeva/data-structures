@@ -1,43 +1,38 @@
-
 #ifndef QUEUE_H_
 #define QUEUE_H_
 
 #include <ostream>
 
-class queue {
-
-	// Private type for internal queue use only
-	struct node {
+class queue
+{
+	struct node
+	{
 		int value;
-		node* next;
+		node *next;
 		// node constructor
-		node(int x): value(x), next(nullptr) { }
+		node(int x) : value(x), next(nullptr) {}
 	};
 
-	// Fields of the queue object
-	
 	size_t queue_size;
-
-	node* front;
-	node* back;
+	node *front;
+	node *back;
 
 public:
-
 	// Creates an empty queue
-	queue(): 
-	     queue_size(0), 
-		 front(nullptr), 
-		 back(nullptr) 
-	{ }
+	queue() : queue_size(0),
+						front(nullptr),
+						back(nullptr)
+	{
+	}
 
 	// Copy constructor
-	queue(const queue& q);
+	queue(const queue &q);
 
 	// Initializer list constructor
 	queue(std::initializer_list<int> ilist);
 
 	// Copy assignment
-	queue& operator=(const queue& q);
+	queue &operator=(const queue &q);
 
 	// Insert an item at the back of the queue
 	void push(int val);
@@ -60,13 +55,15 @@ public:
 	bool empty() const;
 
 	// Print out the contents of the queue
-	void print(std::ostream& out) const {
-
-		node* curr = front;
+	void print(std::ostream &out) const
+	{
+		node *curr = front;
 
 		out << "[";
-		for (size_t i = 0; i < queue_size; ++i) {
-			if (i > 0) {
+		for (size_t i = 0; i < queue_size; ++i)
+		{
+			if (i > 0)
+			{
 				out << ", ";
 			}
 			out << curr->value;
@@ -79,11 +76,10 @@ public:
 	~queue();
 };
 
-inline std::ostream& operator<<(std::ostream& out, const queue& stk) {
+inline std::ostream &operator<<(std::ostream &out, const queue &stk)
+{
 	stk.print(out);
 	return out;
 }
-
-
 
 #endif /* QUEUE_H_ */

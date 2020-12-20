@@ -5,9 +5,8 @@ stack::stack(const stack& stk) :
 		stack_size(stk.stack_size),
 		array_capacity(stk.array_capacity)
 {
-    for (size_t i = 0; i < stk.stack_size; ++i) {
+    for (size_t i = 0; i < stk.stack_size; ++i)
         values[i] = stk.values[i];
-    }
 }
 
 stack::stack(std::initializer_list<int> ilist) :
